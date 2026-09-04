@@ -216,3 +216,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Node / Frontend
+node_modules/
+dist/
+.yarn/cache/
+.yarn/install-state.gz
+.idea/
+.DS_Store

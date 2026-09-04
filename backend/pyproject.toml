@@ -1,0 +1,48 @@
+[project]
+name = "ibkr-bot-backend"
+version = "0.1.0"
+description = "FastAPI backend & Lumibot trading engine for IBKR bot"
+readme = "README.md"
+authors = [
+    { name = "kalbasa28", email = "r.makaveckasss@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "lumibot>=4.5.0",
+    "sqlalchemy>=2.0.0",
+    "pydantic-settings>=2.5.0",
+    "websockets>=13.0",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.0",
+    "poethepoet>=0.48.0",
+    "pytest>=8.0.0",
+    "ruff>=0.8.0",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.poe.tasks]
+lint = "ruff check ."
+"lint:fix" = "ruff check --fix ."
+format = "ruff format ."
+"format:check" = "ruff format --check ."
+check = ["lint", "format:check"]
+fix = ["format", "lint:fix"]
+test = "pytest"
+dev = "uvicorn src.api.main:app --reload --port 8000"
+
+
